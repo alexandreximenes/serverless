@@ -1,0 +1,36 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'Venda
+
+  Sample SAM Template for Venda
+
+  '
+Resources:
+  VendaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: VendaFunction
+      Handler: mpackage.VendaLambda::get
+      Runtime: java11
+      MemorySize: 512
+      Timeout: 10
+      Events:
+        VendaEvents:
+          Type: Api
+          Properties:
+            Path: /
+            Method: get
+  CreateVendaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: CreateVendaFunction
+      Handler: mpackage.VendaLambda::post
+      Runtime: java11
+      MemorySize: 512
+      Timeout: 10
+      Events:
+        VendaEvents:
+          Type: Api
+          Properties:
+            Path: /
+            Method: post
