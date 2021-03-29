@@ -1,18 +1,24 @@
 package mpackage;
 
-public class Venda {
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serializable;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Venda implements Serializable {
+
+    @JsonProperty("id")
     private Long id;
+    @JsonProperty("produto")
     private String produto;
-    private Double preco;
 
     public Venda() {
     }
 
-    public Venda(Long id, String produto, Double preco) {
+    public Venda(Long id, String produto) {
         this.id = id;
         this.produto = produto;
-        this.preco = preco;
     }
 
     public Long getId() {
@@ -29,13 +35,5 @@ public class Venda {
 
     public void setProduto(String produto) {
         this.produto = produto;
-    }
-
-    public Double getPreco() {
-        return preco;
-    }
-
-    public void setPreco(Double preco) {
-        this.preco = preco;
     }
 }

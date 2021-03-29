@@ -31,9 +31,9 @@ public class mClass {
     public List<Venda> getVendasList(){
 
         return List.of(
-                new Venda(1l, "Celular", 900.00),
-                new Venda(1l, "Guarda roupa", 200.00),
-                new Venda(1l, "TV", 1000.00)
+                new Venda(1l, "Celular"),
+                new Venda(1l, "Guarda roupa"),
+                new Venda(1l, "TV")
                 );
     }
 
@@ -43,9 +43,9 @@ public class mClass {
                 .writerWithDefaultPrettyPrinter()
                 .writeValueAsString(
                 List.of(
-                new Venda(1l, "Celular", 900.00),
-                new Venda(1l, "Guarda roupa", 200.00),
-                new Venda(1l, "TV", 1000.00)
+                new Venda(1l, "Celular"),
+                new Venda(1l, "Guarda roupa"),
+                new Venda(1l, "TV")
         )
                 );
     }

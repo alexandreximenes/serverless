@@ -1,13 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6c42b44-c5cc-415c-ad4b-4ab30674a495" name="Default Changelist" comment="" />
+    <list default="true" id="b6c42b44-c5cc-415c-ad4b-4ab30674a495" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../lambda1/.idea/lambda1.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lambda3/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lambda5/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lambda6/Loja/.idea/Loja.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lambda6/Loja/HelloWorldFunction/HelloWorld.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lambda5/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../lambda5/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lambda5/Venda/.aws-sam/build.toml" beforeDir="false" afterPath="$PROJECT_DIR$/../lambda5/Venda/.aws-sam/build.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lambda5/Venda/.aws-sam/build/template.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../lambda5/Venda/.aws-sam/build/template.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lambda5/Venda/VendaFunction/HelloWorld.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../lambda5/Venda/VendaFunction/HelloWorld.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lambda5/Venda/template.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../lambda5/Venda/template.yaml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="ProjectId" id="1qPW3rlqpcjRgTAnculnNQU0uoX" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -17,21 +35,8 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../lambda5" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../lambda6/Loja" />
     <property name="nodejs_package_manager_path" value="npm" />
-  </component>
-  <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -43,6 +48,7 @@
       <updated>1616981545912</updated>
       <workItem from="1616981548909" duration="258000" />
       <workItem from="1616981839846" duration="1461000" />
+      <workItem from="1617030375441" duration="19000" />
     </task>
     <servers />
   </component>
