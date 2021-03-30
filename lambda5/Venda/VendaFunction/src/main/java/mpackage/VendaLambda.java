@@ -23,10 +23,15 @@ public class VendaLambda {
     public APIGatewayProxyResponseEvent get(APIGatewayProxyRequestEvent request) throws JsonProcessingException {
 
         AmazonDynamoDB dynamoDB = AmazonDynamoDBClientBuilder.defaultClient();
+
         ScanResult scanResult = dynamoDB.scan(new ScanRequest().withTableName(System.getenv("VENDA_TABLE")));
-        List<Venda> vendas = scanResult.getItems().stream().map(item ->
+
+        List<Venda> vendas = scanResult
+                .getItems()
+                .stream().map(item ->
                 new Venda(Long.parseLong(item.get("id").getN()), item.get("produto").getS())
         ).collect(Collectors.toList());
+
         if(!vendas.isEmpty()){
             System.out.println(mapper.writeValueAsString(vendas));
             return new APIGatewayProxyResponseEvent().withStatusCode(200).withBody(mapper.writeValueAsString(vendas));
@@ -39,6 +44,7 @@ public class VendaLambda {
     public APIGatewayProxyResponseEvent post(APIGatewayProxyRequestEvent request) throws JsonProcessingException {
 
         System.out.println("venda recebido: "+ request.getBody());
+
         Venda venda = mapper.readValue(request.getBody(), Venda.class);
 
         //banco
@@ -49,6 +55,7 @@ public class VendaLambda {
                 .withString("produto", venda.getProduto());
 
         System.out.println(item);
+
         table.putItem(item);
 
         return new APIGatewayProxyResponseEvent().withStatusCode(200).withBody("Venda recebido: "+mapper.writeValueAsString(venda));

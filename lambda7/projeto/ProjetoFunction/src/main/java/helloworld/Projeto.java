@@ -1,10 +1,20 @@
 package helloworld;
 
-public class Projeto {
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.io.Serializable;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Projeto implements Serializable {
+
+    private Integer id;
     private String nome;
 
-    public Projeto(String nome) {
+    public Projeto() {
+    }
+
+    public Projeto(Integer id, String nome) {
+        this.id = id;
         this.nome = nome;
     }
 
@@ -15,4 +25,13 @@ public class Projeto {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
 }

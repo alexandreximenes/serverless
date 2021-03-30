@@ -1,61 +1,33 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
-  projeto
+  Produtos
 
-  Sample SAM Template for projeto
+  Sample SAM Template for Produtos
 
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
-Globals:
-  Function:
-    Runtime: java11
-    MemorySize: 512
-    Timeout: 60
-    Environment:
-      Variables:
-        PROJETO_TABLE: !Ref ProdutoTable
+#Globals:
+#  Function:
+#    Timeout: 20
 
 Resources:
-  ProdutoTable:
-    Type: AWS::Serverless::SimpleTable
-    Properties:
-      PrimaryKey:
-        Name: id
-        Type: Number
-  ProjetoFunction:
+  HelloWorldFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      CodeUri: ProjetoFunction
-      Handler: helloworld.api.ProjetoRest::get
-      Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref ProdutoTable
+      CodeUri: HelloWorldFunction
+      Handler: helloworld.App::olamundo2
       Runtime: java11
       MemorySize: 512
 #      Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
 #        Variables:
 #          PARAM1: VALUE
-      Events:
-        HelloWorld:
-          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
-          Properties:
-            Path: /
-            Method: GET
-  CreateProdutoFunction:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
-    Properties:
-      CodeUri: ProjetoFunction
-      Handler: helloworld.api.ProjetoRest::post
-      Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref ProdutoTable
-      Events:
-        VendaEvents:
-          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
-          Properties:
-            Path: /
-            Method: post
-#
+#      Events:
+#        HelloWorld:
+#          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+#          Properties:
+#            Path: /hello
+#            Method: get
+
 #Outputs:
 #  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
 #  # Find out more about other implicit resources you can reference within SAM

@@ -6,6 +6,6 @@ codeuri = "/home/alexandre/Documents/serverless/lambda7/projeto/ProjetoFunction"
 runtime = "java11"
 source_md5 = ""
 packagetype = "Zip"
-functions = ["ProjetoFunction"]
+functions = ["ProjetoFunction", "CreateProdutoFunction"]
 
 [layer_build_definitions]
