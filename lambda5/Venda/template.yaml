@@ -6,9 +6,11 @@ Description: >
   Sample SAM Template for Venda
 
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
-#Globals:
-#  Function:
-#    Timeout: 20
+Globals:
+  Function:
+    Runtime: java11
+    MemorySize: 512
+    Timeout: 30
 
 Resources:
   VendaFunction:
@@ -16,8 +18,6 @@ Resources:
     Properties:
       CodeUri: VendaFunction
       Handler: mpackage.VendaLambda::get
-      Runtime: java11
-      MemorySize: 512
       Timeout: 10
       Events:
         VendaEvents:
