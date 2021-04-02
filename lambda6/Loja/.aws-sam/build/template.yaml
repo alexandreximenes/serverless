@@ -1,0 +1,27 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'Loja
+
+  Sample SAM Template for Loja
+
+  '
+Globals:
+  Function:
+    Timeout: 20
+Resources:
+  LojaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: LojaFunction
+      Handler: loja.App::handleRequest
+      Runtime: java11
+      MemorySize: 512
+      Environment:
+        Variables:
+          PARAM1: VALUE
+      Events:
+        HelloWorld:
+          Type: Api
+          Properties:
+            Path: /hello
+            Method: get

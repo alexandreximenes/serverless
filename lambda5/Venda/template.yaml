@@ -10,15 +10,26 @@ Globals:
   Function:
     Runtime: java11
     MemorySize: 512
-    Timeout: 30
+    Timeout: 60
+    Environment:
+      Variables:
+        VENDA_TABLE: !Ref VendaTable
 
 Resources:
+  VendaTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      PrimaryKey:
+        Name: id
+        Type: Number
   VendaFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: VendaFunction
       Handler: mpackage.VendaLambda::get
-      Timeout: 10
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref VendaTable
       Events:
         VendaEvents:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
@@ -30,9 +41,9 @@ Resources:
     Properties:
       CodeUri: VendaFunction
       Handler: mpackage.VendaLambda::post
-      Runtime: java11
-      MemorySize: 512
-      Timeout: 10
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref VendaTable
       Events:
         VendaEvents:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
