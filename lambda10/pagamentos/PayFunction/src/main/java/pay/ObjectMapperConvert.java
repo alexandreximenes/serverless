@@ -1,29 +1,28 @@
-package Pay;
+package pay;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import lombok.SneakyThrows;
 
-public class ObjectMapperConvert<T> {
+public class ObjectMapperConvert {
 
 
-    static ObjectMapper objectMapper;
+    ObjectMapper objectMapper = new ObjectMapper().configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
 
     public ObjectMapperConvert() {
-        objectMapper = new ObjectMapper().configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
     }
 
     @SneakyThrows
-    public T toObject(Class<T> object, String str) {
+    public Pay toObject(String str) {
 
-        T t = objectMapper.readValue(str, object);
-        return t;
+        Pay pay = objectMapper.readValue(str, Pay.class);
+        return pay;
     }
 
     @SneakyThrows
-    public String toJson(Class<T> object, Pay pay) {
+    public String toJson(Object o) {
 
-        return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(pay);
+        return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(o);
 
     }
 

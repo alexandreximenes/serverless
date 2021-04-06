@@ -1,23 +1,46 @@
-package Pay;
+package pay;
 
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
+import java.util.List;
+
 public class PayService {
 
-    private final PayRepository payRepository;
-    private final ObjectMapperConvert<Pay> objectMapperConvert;
+    private PayRepository payRepository = new PayRepository();
+    private ObjectMapperConvert objectMapperConvert = new ObjectMapperConvert();
+
+    public PayService() {
+    }
 
     public Pay save(String strPay) {
 
-        Pay pay = objectMapperConvert.toObject(Pay.class, strPay);
+        Pay pay = objectMapperConvert.toObject(strPay);
         return payRepository.save(pay);
     }
 
-    public Pay findAll() {
+    public Object findAll() {
 
-        new Paym
-        Pay pay = objectMapperConvert.toJson(Pay.class, );
-        return payRepository.findAll();
+        List<Pay> all = payRepository.findAll();
+        return objectMapperConvert.toJson(all);
+    }
+
+    public Object findById(String id) {
+
+        return payRepository
+                .findById(id)
+                .map(objectMapperConvert::toJson)
+                .orElse("Não encontramos com ID: "+id);
+    }
+
+    public Object update(String id, Pay p) {
+
+        Pay pay = payRepository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("Não encontramos com ID: " + id));
+
+        pay.setPrice(p.getPrice());
+
+        pay = payRepository.update(pay);
+        return objectMapperConvert.toJson(pay);
     }
 }

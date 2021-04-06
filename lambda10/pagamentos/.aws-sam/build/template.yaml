@@ -1,0 +1,100 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'pagamentos
+
+  Sample SAM Template for pagamentos
+
+  '
+Globals:
+  Function:
+    Timeout: 30
+    Runtime: java11
+    MemorySize: 512
+    Environment:
+      Variables:
+        PAY_TABLE:
+          Ref: PayTable
+Resources:
+  PayTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      PrimaryKey:
+        Name: id
+        Type: Number
+  PayChargeFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: PayChargeFunction
+      Handler: pay.PayController::charge
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName:
+            Ref: PayTable
+      Environment:
+        Variables:
+          PARAM1: VALUE
+      Events:
+        Pay:
+          Type: Api
+          Properties:
+            Path: /
+            Method: POST
+  PayByIdFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: PayByIdFunction
+      Handler: pay.PayController::findById
+      Policies:
+      - DynamoDBReadPolicy:
+          TableName:
+            Ref: PayTable
+      Environment:
+        Variables:
+          PARAM1: VALUE
+      Events:
+        Pay:
+          Type: Api
+          Properties:
+            Path: /{id}
+            Method: GET
+  PayFindAllFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: PayFindAllFunction
+      Handler: pay.PayController::findAll
+      Policies:
+      - DynamoDBReadPolicy:
+          TableName:
+            Ref: PayTable
+      Environment:
+        Variables:
+          PARAM1: VALUE
+      Events:
+        Pay:
+          Type: Api
+          Properties:
+            Path: /
+            Method: GET
+  PayUpdateFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: PayUpdateFunction
+      Handler: pay.PayController::update
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName:
+            Ref: PayTable
+      Environment:
+        Variables:
+          PARAM1: VALUE
+      Events:
+        Pay:
+          Type: Api
+          Properties:
+            Path: /{id}
+            Method: PUT
+Outputs:
+  HelloWorldApi:
+    Description: API Gateway endpoint URL for Prod stage for Payment function
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/

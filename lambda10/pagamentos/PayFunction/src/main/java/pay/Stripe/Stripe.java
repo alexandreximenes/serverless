@@ -1,6 +1,6 @@
-package Pay.Stripe;
+package pay.Stripe;
 
-import Pay.Pay;
+import pay.Pay;
 import com.stripe.model.Payout;
 import lombok.SneakyThrows;
 

@@ -1,4 +1,4 @@
-package Pay.Stripe;
+package pay.Stripe;
 
 import com.stripe.net.RequestOptions;
 
@@ -10,7 +10,7 @@ public class StripeConfig {
     private StripeConfig() {
 
         requestOptions = RequestOptions.builder()
-                .setApiKey("pk_test_hasldPZsx3Bnkeuv7IC3JZ4Q00Kd3riNeh")
+                .setApiKey("jfklsdjfljsdklfjsklfjklsjfklasdjfklsdjfkl")
                 .build();
     }
 
