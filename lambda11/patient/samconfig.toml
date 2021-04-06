@@ -1,0 +1,10 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "Patient"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-kovbgtttmlha"
+s3_prefix = "Patient"
+region = "us-east-1"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"

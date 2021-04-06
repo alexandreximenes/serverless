@@ -1,0 +1,53 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'patient
+
+  Sample SAM Template for patient
+
+  '
+Globals:
+  Function:
+    Timeout: 30
+Resources:
+  PatientTopic:
+    Type: AWS::SNS::Topic
+  PatientFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: PatientFunction
+      Handler: api.PatientController::post
+      Runtime: java11
+      MemorySize: 512
+      Policies:
+      - SNSPublishMessagePolicy:
+          TopicName:
+            Fn::GetAtt:
+            - PatientTopic
+            - TopicName
+      Environment:
+        Variables:
+          PATIENT_TOPIC:
+            Ref: PatientTopic
+      Events:
+        PatientEvent:
+          Type: Api
+          Properties:
+            Path: /
+            Method: POST
+  PatientReceivedSNSFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: PatientReceivedSNSFunction
+      Handler: api.PatientController::get
+      Runtime: java11
+      MemorySize: 512
+      Environment:
+        Variables:
+          PATIENT_TOPIC:
+            Ref: PatientTopic
+      Events:
+        SNSEvent:
+          Type: SNS
+          Properties:
+            Topic:
+              Ref: PatientTopic
