@@ -60,6 +60,19 @@ Resources:
           Type: SNS # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Topic: !Ref PatientDLQ
+  PatientSQSFunction:
+    PatientSQS:
+      Type: AWS::SQS::Queue
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: PatientFunction
+      Handler: api.PatientController::mSQS
+      Events:
+        SQSEvent:
+          Type: SQS # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Queue: !GetAtt PatientSQS.Arn
+            BatchSize: 10
 #
 #Outputs:
 #  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function

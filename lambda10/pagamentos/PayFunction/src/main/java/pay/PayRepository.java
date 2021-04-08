@@ -30,7 +30,7 @@ public class PayRepository {
 
     public Pay save(Pay pay) {
 
-        pay.setId(UUID.randomUUID().toString());
+        pay.setId(UUID.randomUUID().toString().substring(6));
 
         Item item = new Item()
                 .withPrimaryKey("id", pay.getId())

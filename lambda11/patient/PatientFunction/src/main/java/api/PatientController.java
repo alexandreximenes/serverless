@@ -6,6 +6,7 @@ import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 import com.amazonaws.services.lambda.runtime.events.SNSEvent;
+import com.amazonaws.services.lambda.runtime.events.SQSEvent;
 import com.amazonaws.services.sns.AmazonSNS;
 import com.amazonaws.services.sns.AmazonSNSClientBuilder;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -59,5 +60,11 @@ public class PatientController {
 
         return new APIGatewayProxyResponseEvent().withBody(mapper.writeValueAsString(o.get()
         )).withStatusCode(200);
+    }
+
+    public void mSQS(SQSEvent event){
+
+        event.getRecords().forEach(e -> System.out.println(e.getBody()));
+
     }
 }

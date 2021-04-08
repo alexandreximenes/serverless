@@ -66,3 +66,19 @@ Resources:
           Properties:
             Topic:
               Ref: PatientDLQ
+  PatientSQSFunction:
+    PatientSQS:
+      Type: AWS::SQS::Queue
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: PatientSQSFunction
+      Handler: api.PatientController::mSQS
+      Events:
+        SQSEvent:
+          Type: SQS
+          Properties:
+            Queue:
+              Fn::GetAtt:
+              - PatientSQS
+              - Arn
+            BatchSize: 10

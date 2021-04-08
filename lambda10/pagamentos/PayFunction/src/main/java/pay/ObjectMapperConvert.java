@@ -7,6 +7,7 @@ import lombok.SneakyThrows;
 public class ObjectMapperConvert {
 
 
+
     ObjectMapper objectMapper = new ObjectMapper().configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
 
     public ObjectMapperConvert() {
