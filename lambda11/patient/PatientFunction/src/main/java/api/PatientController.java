@@ -25,6 +25,8 @@ public class PatientController {
     @SneakyThrows
     public APIGatewayProxyResponseEvent post(APIGatewayProxyRequestEvent request, Context context){
 
+//
+        Thread.sleep(5_000);
 //        List<Object> objects = List.of(context, System.getenv());
         Object objects = context.getFunctionName();
         String s = mapper.writeValueAsString(objects);

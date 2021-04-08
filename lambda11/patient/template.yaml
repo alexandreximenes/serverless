@@ -8,9 +8,13 @@ Description: >
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
-    Timeout: 30
+    Timeout: 20
+    Runtime: java11
+    MemorySize: 512
 
 Resources:
+  PatientDLQ:
+    Type: AWS::SNS::Topic
   PatientTopic:
     Type: AWS::SNS::Topic
   PatientFunction:
@@ -18,8 +22,9 @@ Resources:
     Properties:
       CodeUri: PatientFunction
       Handler: api.PatientController::post
-      Runtime: java11
-      MemorySize: 512
+      DeadLetterQueue:
+        Type: SNS
+        TargetArn: !Ref PatientDLQ
       Policies:
         - SNSPublishMessagePolicy:
             TopicName: !GetAtt PatientTopic.TopicName
@@ -37,8 +42,6 @@ Resources:
     Properties:
       CodeUri: PatientFunction
       Handler: api.PatientController::get
-      Runtime: java11
-      MemorySize: 512
       Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
         Variables:
           PATIENT_TOPIC: !Ref PatientTopic
@@ -47,6 +50,16 @@ Resources:
           Type: SNS # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Topic: !Ref PatientTopic
+  ErrorHandlingFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: PatientFunction
+      Handler: api.ErrorHandler.Errors::handler
+      Events:
+        SNSEvent:
+          Type: SNS # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Topic: !Ref PatientDLQ
 #
 #Outputs:
 #  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function

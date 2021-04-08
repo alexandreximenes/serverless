@@ -6,6 +6,6 @@ codeuri = "PatientFunction"
 runtime = "java11"
 source_md5 = ""
 packagetype = "Zip"
-functions = ["PatientFunction", "PatientReceivedSNSFunction"]
+functions = ["PatientFunction", "PatientReceivedSNSFunction", "ErrorHandlingFunction"]
 
 [layer_build_definitions]

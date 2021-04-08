@@ -7,8 +7,12 @@ Description: 'patient
   '
 Globals:
   Function:
-    Timeout: 30
+    Timeout: 20
+    Runtime: java11
+    MemorySize: 512
 Resources:
+  PatientDLQ:
+    Type: AWS::SNS::Topic
   PatientTopic:
     Type: AWS::SNS::Topic
   PatientFunction:
@@ -16,8 +20,10 @@ Resources:
     Properties:
       CodeUri: PatientFunction
       Handler: api.PatientController::post
-      Runtime: java11
-      MemorySize: 512
+      DeadLetterQueue:
+        Type: SNS
+        TargetArn:
+          Ref: PatientDLQ
       Policies:
       - SNSPublishMessagePolicy:
           TopicName:
@@ -39,8 +45,6 @@ Resources:
     Properties:
       CodeUri: PatientReceivedSNSFunction
       Handler: api.PatientController::get
-      Runtime: java11
-      MemorySize: 512
       Environment:
         Variables:
           PATIENT_TOPIC:
@@ -51,3 +55,14 @@ Resources:
           Properties:
             Topic:
               Ref: PatientTopic
+  ErrorHandlingFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ErrorHandlingFunction
+      Handler: api.ErrorHandler.Errors::handler
+      Events:
+        SNSEvent:
+          Type: SNS
+          Properties:
+            Topic:
+              Ref: PatientDLQ
